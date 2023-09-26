@@ -1,14 +1,62 @@
 package fr.fms;
 
-public class Main {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
+public class Main {
+    private static Scanner scanner = new Scanner(System.in);
+    private static Pattern regExp = Pattern.compile("[0-9]+");
+    private static Logger logger = Logger.getLogger("");
     public static void main(String[] args) {
-	// A. Volet initial :
-        // 1. Demander à l'utilisateur un nb entier strictement positif
-        // 2. Cas 1 : nb pair => /2 ou cas 2 : nb impair => *3+1 à appliquer
-        // 3. Exécuter la condition tant que le nombre n'est pas = 1 et donc afficher nb après chaque opération et n : tps de vol du nb
-    // B. Volet optionnel :
-        // 1. Calculer et afficher m : tps de vol en altitude, plus petit m pour lequel m+1 correspond au tps de vol d'un nb inférieur ou égal au nb de départ
-        // 2. Calculer et afficher altitude maxi: nb le plus haut atteint avec les calculs
+       display(scanner);
+    }
+    public static ArrayList<Integer> getList (int nb){
+        ArrayList<Integer> list = new ArrayList<>();
+        int a =0;
+        do {
+            if (nb % 2 == 0) {
+                list.add(nb/2);
+                nb = nb/2;
+
+            } else {
+                list.add(nb* 3 + 1);
+                nb =nb* 3 + 1;
+            }
+            if(nb==1)
+                a=nb;
+        }while (a!=1);
+        return list;
+    }
+    public static void display(Scanner scanner){
+        ArrayList<Integer> listOfNumbers;
+        System.out.println("Bonjour souhaitez vous voir la conjecture Tchèque O/N?");
+        String str = scanner.next();
+        while(str.equalsIgnoreCase("oui") || str.equalsIgnoreCase("o")){
+        System.out.println("Veuillez saisir un nombre entier positif : ");
+        int nb = 0;
+        if (scanner.hasNext(regExp)) {
+            nb = scanner.nextInt();
+            listOfNumbers = getList(nb);
+            System.out.println("La liste des nombres successifs est : " + listOfNumbers);
+            System.out.println("Le temps de vol du nombre " + nb + " est " + listOfNumbers.size());
+            for (int i = 0; i < listOfNumbers.size(); i++) {
+                if (listOfNumbers.get(i) <= nb) {
+                    System.out.println(i + 1);
+                }
+            }
+            Collections.sort(listOfNumbers);
+            System.out.println("La valeur maximale de la suite est : " + listOfNumbers.get(listOfNumbers.size() - 1));
+        }
+        else {
+            System.out.println("J'ai demandé un nombre entier positif");
+        }
+            System.out.println("Voulez vous saisir un nouveau nombre ?");
+            str = scanner.next();
+        };
+        System.out.println("au revoir");
+        scanner.close();
     }
 }
