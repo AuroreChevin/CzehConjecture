@@ -3,13 +3,11 @@ package fr.fms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static Pattern regExp = Pattern.compile("[0-9]+");
-    private static Logger logger = Logger.getLogger("");
     public static void main(String[] args) {
        display(scanner);
     }
@@ -28,10 +26,11 @@ public class Main {
             if(nb==1)
                 a=nb;
         }while (a!=1);
-        return list;
+    return list;
     }
     public static void display(Scanner scanner){
         ArrayList<Integer> listOfNumbers;
+        ArrayList<Integer> flightList = new ArrayList<Integer>();
         System.out.println("Bonjour souhaitez vous voir la conjecture Tchèque O/N?");
         String str = scanner.next();
         while(str.equalsIgnoreCase("oui") || str.equalsIgnoreCase("o")){
@@ -44,9 +43,11 @@ public class Main {
             System.out.println("Le temps de vol du nombre " + nb + " est " + listOfNumbers.size());
             for (int i = 0; i < listOfNumbers.size(); i++) {
                 if (listOfNumbers.get(i) <= nb) {
-                    System.out.println(i + 1);
+                    flightList.add(i+1);
                 }
             }
+            System.out.println(flightList.get(0));
+            flightList.clear();
             Collections.sort(listOfNumbers);
             System.out.println("La valeur maximale de la suite est : " + listOfNumbers.get(listOfNumbers.size() - 1));
         }
