@@ -9,7 +9,7 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static Pattern regExp = Pattern.compile("[0-9]+");
     public static void main(String[] args) {
-       display(scanner);
+        display(scanner);
     }
     public static ArrayList<Integer> getList (int nb){
         ArrayList<Integer> list = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Main {
                     flightList.add(i+1);
                 }
             }
-            System.out.println(flightList.get(0));
+            System.out.println("Le temps de vol en altitude est "+flightList.get(0));
             flightList.clear();
             Collections.sort(listOfNumbers);
             System.out.println("La valeur maximale de la suite est : " + listOfNumbers.get(listOfNumbers.size() - 1));
